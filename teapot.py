@@ -92,16 +92,16 @@ SESSION_STORE_PATH = os.environ.get(
 APP_NAME = "teapot"
 # one less than the first port that is going to be used by any storm webdav instance, should be above 1024
 # as all ports below this are privileged and normal users will not be able to use them to run services.
-STARTING_PORT = 32399
+STARTING_PORT = int(os.environ.get("TEAPOT_START_PORT", 32399))
 # toggle restarting teapot without deleting saved state and without terminating running webdav instances.
 # N.B. will only consider the value set at startup of this app.
 RESTART = os.environ.get("TEAPOT_RESTART", "False") == "True"
 # instance timeout, instances are deleted after this time without being accessed.
 # default: 10 minutes
-INSTANCE_TIMEOUT_SEC = 600
+INSTANCE_TIMEOUT_SEC = int(os.environ.get("TEAPOT_INSTANCE_TIMEOUT", 600))
 # interval between instance timeout checks in stop_expired_instances
 # default: 3 minutes
-CHECK_INTERVAL_SEC = 180
+CHECK_INTERVAL_SEC = int(os.environ.get("TEAPOT_CHECK_INTERVAL", 180))
 # number of times that teapot will try to connect to a recently started instance
 STARTUP_TIMEOUT = int(os.environ.get("TEAPOT_STARTUP_TIMEOUT", 30))
 # standard mode for file creation, currently rwxr-x---
